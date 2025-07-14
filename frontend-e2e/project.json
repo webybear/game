@@ -1,0 +1,17 @@
+{
+  "name": "frontend-e2e",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "frontend-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/playwright:playwright",
+      "options": {
+        "config": "frontend-e2e/playwright.config.ts"
+      },
+      "dependsOn": ["frontend:build"]
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["frontend"]
+} 

@@ -1,0 +1,13 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "sourceMap": false,
+    "outDir": "../dist/out-tsc",
+    "allowJs": true,
+    "types": ["jest", "node"],
+    "paths": {
+      "@swapi-game/backend/*": ["../backend/src/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.js"]
+}

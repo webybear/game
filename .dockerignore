@@ -1,0 +1,14 @@
+node_modules
+/node_modules
+**/node_modules
+cdk.out
+/cdk.out
+**/cdk.out
+.git
+.idea
+.vscode
+*.iml
+*.swp
+*.swo
+npm-debug.log
+.DS_Store 

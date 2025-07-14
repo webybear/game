@@ -1,0 +1,119 @@
+# An enum to define the type of resource being used in a game
+enum ResourceType {
+  PEOPLE
+  STARSHIPS
+}
+
+# Represents a person from the Star Wars universe
+type Person {
+  id: ID!
+  name: String!
+  mass: Int!
+  height: String
+  gender: String
+  homeworld: String
+}
+
+# Represents a starship from the Star Wars universe
+type Starship {
+  id: ID!
+  name: String!
+  crew: Int!
+  model: String
+  manufacturer: String
+  passengers: String
+}
+
+# Union type for game entities that can be compared
+union GameEntity = Person | Starship
+
+# Standard paginated response for listing people
+type PeopleConnection {
+  items: [Person!]!
+  nextToken: String
+  totalCount: Int
+}
+
+# Standard paginated response for listing starships
+type StarshipConnection {
+  items: [Starship!]!
+  nextToken: String
+  totalCount: Int
+}
+
+# Represents a game round result
+type GameRound {
+  entities: [GameEntity!]!
+  winner: GameEntity
+  winningAttribute: String
+  resourceType: ResourceType!
+}
+
+# Input types for creating data
+input CreatePersonInput {
+  name: String!
+  mass: Int!
+  height: String
+  gender: String
+  homeworld: String
+}
+
+input CreateStarshipInput {
+  name: String!
+  crew: Int!
+  model: String
+  manufacturer: String
+  passengers: String
+}
+
+# Input types for updating data
+input UpdatePersonInput {
+  id: ID!
+  name: String
+  mass: Int
+  height: String
+  gender: String
+  homeworld: String
+}
+
+input UpdateStarshipInput {
+  id: ID!
+  name: String
+  crew: Int
+  model: String
+  manufacturer: String
+  passengers: String
+}
+
+type GameStats {
+  peopleCount: Int!
+  starshipsCount: Int!
+}
+
+type Query {
+  # Game-specific queries
+  # Fetches two random entities to play a round
+  getRandomPair(resource: ResourceType!): GameRound!
+  
+  # Data retrieval queries
+  getPerson(id: ID!): Person
+  getStarship(id: ID!): Starship
+  listPeople(limit: Int, nextToken: String): PeopleConnection!
+  listStarships(limit: Int, nextToken: String): StarshipConnection!
+  gameStats: GameStats!
+}
+
+type Mutation {
+  # CRUD Mutations for people
+  createPerson(input: CreatePersonInput!): Person!
+  updatePerson(input: UpdatePersonInput!): Person!
+  deletePerson(id: ID!): ID!
+
+  # CRUD Mutations for starships
+  createStarship(input: CreateStarshipInput!): Starship!
+  updateStarship(input: UpdateStarshipInput!): Starship!
+  deleteStarship(id: ID!): ID!
+
+  # Utility mutations
+  seedDatabase: String!
+}

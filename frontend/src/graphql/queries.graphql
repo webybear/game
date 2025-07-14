@@ -1,0 +1,38 @@
+query GetRandomPair($resource: ResourceType!) {
+  getRandomPair(resource: $resource) {
+    entities {
+      __typename
+      ... on Person {
+        id
+        name
+        mass
+        height
+        gender
+        homeworld
+      }
+      ... on Starship {
+        id
+        name
+        crew
+        model
+        manufacturer
+        passengers
+      }
+    }
+    winner {
+      __typename
+      ... on Person {
+        id
+        name
+        mass
+      }
+      ... on Starship {
+        id
+        name
+        crew
+      }
+    }
+    winningAttribute
+    resourceType
+  }
+} 
